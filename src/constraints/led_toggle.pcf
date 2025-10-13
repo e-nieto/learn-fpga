@@ -1,0 +1,10 @@
+# Clock
+# Clock in Alchitry Cu is 100MHz
+set_io i_Clk P7
+
+# LED pins
+set_io o_LED E12
+
+# Push-button switches:
+set_io i_Switch D1
+
