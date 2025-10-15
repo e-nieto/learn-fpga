@@ -11,7 +11,7 @@ SYNTH_DIR := $(TARGET_DIR)/synth
 PNR_DIR := $(TARGET_DIR)/pnr
 BITSTREAM_DIR := $(TARGET_DIR)/bitstream
 
-VHDL_SRCS := $(wildcard $(SRC_DIR)/*.vhdl)
+VHDL_SRCS := $(shell find $(SRC_DIR) -name "*.vhdl")
 SYNTH_VHDL_SRCS := $(filter-out %_tb.vhdl, $(VHDL_SRCS))
 SIM_VHDL_SRCS := $(filter %_tb.vhdl, $(VHDL_SRCS))
 YOSYS_GHDL_SOURCES := $(SYNTH_VHDL_SRCS)
