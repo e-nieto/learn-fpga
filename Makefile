@@ -15,6 +15,9 @@ VHDL_SRCS := $(shell find $(SRC_DIR) -name "*.vhdl")
 SYNTH_VHDL_SRCS := $(filter-out %_tb.vhdl, $(VHDL_SRCS))
 SIM_VHDL_SRCS := $(filter %_tb.vhdl, $(VHDL_SRCS))
 YOSYS_GHDL_SOURCES := $(SYNTH_VHDL_SRCS)
+ENTITY_SRCS := $(shell find $(SRC_DIR)/entities -name "*.vhdl" | sort)
+TOP_SRCS := $(shell find $(SRC_DIR)/top -name "*.vhdl" | sort)
+TB_SRCS := $(shell find $(SRC_DIR)/testbenches -name "*.vhdl" | sort)
 
 JSON_FILE := $(SYNTH_DIR)/$(TOP).json
 ASC_FILE := $(PNR_DIR)/$(TOP).asc
@@ -62,10 +65,10 @@ simulate: $(GTKWAVE_FILE)
 $(GTKWAVE_FILE): $(VHDL_SRCS)
 	@mkdir -p $(SIM_DIR)
 	# Synthesize first all the non-testbench units:
-	ghdl -a --std=08 --workdir=$(SIM_DIR) $(SYNTH_VHDL_SRCS)
-	# And now testbenches
-	ghdl -a --std=08 --workdir=$(SIM_DIR) $(SIM_VHDL_SRCS)
-	# And now elaborate for testbench
+	ghdl -a --std=08 --workdir=$(SIM_DIR) $(ENTITY_SRCS)
+	ghdl -a --std=08 --workdir=$(SIM_DIR) $(TOP_SRCS)
+	ghdl -a --std=08 --workdir=$(SIM_DIR) $(TB_SRCS)
+	# Emit the top simulation
 	ghdl -e --std=08 --workdir=$(SIM_DIR) -o $(SIM_DIR)/$(TOP)_sim $(TOP)
 	# And run simulations?
 	ghdl -r --std=08 --workdir=$(SIM_DIR) $(TOP) --vcd=$(GTKWAVE_FILE)
