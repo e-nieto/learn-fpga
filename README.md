@@ -16,10 +16,11 @@ your stuff on Linux, not much more going on here.
 
 ## Tools
 
-- **GHDL** – VHDL simulation and synthesis, using VHDL 08.
-- **GTKWave** - Digital signal visualization.
-- **Yosys** – Logic synthesis with GHDL plugin.
-- **Nextpnr** – Place and route.
+- **GHDL** – v5.0.1 - VHDL simulation and synthesis, using VHDL 08.
+- **GHDL-Yosys-Plugin** - 8c29f2c
+- **GTKWave** - v3.3.125 - Digital signal visualization.
+- **Yosys** – v0.52 - Logic synthesis with GHDL plugin.
+- **Nextpnr** – v0.7-1 - Place and route.
 - **Icepack** – Bitstream packaging.
 - **Alchitry Cu V2** – FPGA development board (Lattice iCE40-HX8k-CB132).
 
